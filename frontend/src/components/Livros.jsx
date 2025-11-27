@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { api } from "../services/api";
 
 export default function Livros() {
+
   const [livros, setLivros] = useState([]);
   const [autores, setAutores] = useState([]);
 
@@ -42,11 +43,12 @@ export default function Livros() {
   }
 
   return (
-    <div>
+    <div className="section-card">
 
-      {/* CRIAR */}
       {!editarLivro && (
-        <div>
+        <>
+          <h2>Livros</h2>
+
           <input
             placeholder="Título do livro"
             value={novoLivro.title}
@@ -73,13 +75,12 @@ export default function Livros() {
           </select>
 
           <button onClick={criarLivro}>Criar Livro</button>
-        </div>
+        </>
       )}
 
-      {/* FORM DE EDITAR */}
       {editarLivro && (
-        <div>
-          <h3>Editando Livro</h3>
+        <>
+          <h2>Editando Livro</h2>
 
           <input
             value={editarLivro.title}
@@ -106,21 +107,25 @@ export default function Livros() {
 
           <button onClick={atualizarLivro}>Salvar</button>
           <button onClick={() => setEditarLivro(null)}>Cancelar</button>
-        </div>
+        </>
       )}
 
-      {/* LISTA DE LIVROS */}
       <ul>
         {livros.map((livro) => (
           <li key={livro.id}>
-            <strong>{livro.title}</strong> —{" "}
-            {autores.find((a) => a.id === livro.authorId)?.name}
+            <div>
+              <strong>{livro.title}</strong> —{" "}
+              {autores.find((a) => a.id === livro.authorId)?.name}
+            </div>
 
-            <button onClick={() => setEditarLivro(livro)}>Editar</button>
-            <button onClick={() => deletarLivro(livro.id)}>Excluir</button>
+            <div className="action-buttons">
+              <button onClick={() => setEditarLivro(livro)}>Editar</button>
+              <button className="btn-danger" onClick={() => deletarLivro(livro.id)}>Excluir</button>
+            </div>
           </li>
         ))}
       </ul>
+
     </div>
   );
 }
