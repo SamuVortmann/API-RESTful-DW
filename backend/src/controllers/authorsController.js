@@ -31,11 +31,15 @@ async function atualizarAutor(req, res) {
 }
 
 // DELETE - remover
-async function removerAutor(req, res) {
+async function removerAutor(req, res, next) {
   const id = req.params.id;
-  const ok = await authorService.removerAutor(id);
-  if (!ok) return res.status(404).json({ error: "Autor não encontrado" });
-  res.sendStatus(204);
+  try {
+    const ok = await authorService.removerAutor(id);
+    if (!ok) return res.status(404).json({ error: "Autor não encontrado" });
+    res.sendStatus(204);
+  } catch (err) {
+    next(err);
+  }
 }
 
 module.exports = {
