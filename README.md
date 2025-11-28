@@ -5,7 +5,7 @@ Sistema de gerenciamento de biblioteca com API RESTful.
 
 ### 1. Configure o Banco de Dados
 
-Primeiro, você precisa criar o banco de dados e as tabelas. Execute o script SQL no MySQL:
+Crie o banco de dados e as tabelas. Execute o script SQL no MySQL:
 
 ```bash
 mysql -u seu_usuario -p < backend/tabelas.sql
@@ -20,7 +20,7 @@ cd backend
 npm install
 ```
 
-Depois, crie um arquivo `.env` na pasta `backend/` com as seguintes variáveis:
+Depois, crie um arquivo `.env` na pasta `backend/` com as variáveis:
 
 ```env
 PORT=3000
@@ -32,7 +32,7 @@ ACCESS_TOKEN_SECRET=seu_secret_jwt_aqui
 REFRESH_TOKEN_SECRET=seu_refresh_secret_aqui
 ```
 
-Substitua os valores pelas suas credenciais do MySQL e gere secrets aleatórios para os tokens JWT.
+Substitua os valores pelas suas credenciais do MySQL e crie secrets aleatórios para os tokens JWT.
 
 ### 3. Inicie o Backend
 
@@ -58,7 +58,7 @@ O frontend vai rodar em `http://localhost:5173`.
 
 ## Como Usar
 
-1. Abra o navegador e acesse a URL do frontend (geralmente `http://localhost:5173`)
+1. Abra o navegador e acesse a URL do frontend.
 2. Na tela de login, clique em "Registre-se" para criar uma conta
 3. Preencha nome, email e senha e registre-se
 
