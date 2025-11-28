@@ -91,14 +91,20 @@ export default function Livros() {
   }
 
   async function deletarLivro(id) {
-    if (!confirm("Tem certeza que deseja excluir este livro?")) return;
+    const livro = livros.find(l => l.id === id);
+    const nomeLivro = livro ? livro.titulo : "este livro";
+    
+    if (!confirm(`Tem certeza que deseja excluir "${nomeLivro}"?\n\nEsta ação não pode ser desfeita.`)) return;
 
     try {
       setError("");
+      setLoading(true);
       await api.delete(`/books/${id}`);
       await carregarDados();
     } catch (err) {
       setError(err.response?.data?.error || "Erro ao deletar livro");
+    } finally {
+      setLoading(false);
     }
   }
 

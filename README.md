@@ -1,24 +1,27 @@
-# 📚 Sistema de Inventário de Livros e Autores
+# Sistema de Inventário de Livros e Autores
+Sistema de gerenciamento de biblioteca com API RESTful.
 
-Sistema de gerenciamento de biblioteca com API RESTful e interface web.
-
-## 🚀 Como Rodar
+## Como Rodar o Projeto
 
 ### 1. Configure o Banco de Dados
 
-Execute o script SQL:
+Primeiro, você precisa criar o banco de dados e as tabelas. Execute o script SQL no MySQL:
+
 ```bash
 mysql -u seu_usuario -p < backend/tabelas.sql
 ```
 
 ### 2. Configure o Backend
 
+Entre na pasta do backend e instale as dependências:
+
 ```bash
 cd backend
 npm install
 ```
 
-Crie um arquivo `.env` na pasta `backend/`:
+Depois, crie um arquivo `.env` na pasta `backend/` com as seguintes variáveis:
+
 ```env
 PORT=3000
 DB_HOST=localhost
@@ -29,44 +32,47 @@ ACCESS_TOKEN_SECRET=seu_secret_jwt_aqui
 REFRESH_TOKEN_SECRET=seu_refresh_secret_aqui
 ```
 
+Substitua os valores pelas suas credenciais do MySQL e gere secrets aleatórios para os tokens JWT.
+
 ### 3. Inicie o Backend
 
+Com o banco configurado, inicie o servidor:
+
 ```bash
-cd backend
 npm run dev
 ```
 
-O servidor estará em `http://localhost:3000`
+O servidor vai rodar em `http://localhost:3000`.
 
 ### 4. Inicie o Frontend
 
-Em outro terminal:
+Abra um novo terminal e entre na pasta do frontend:
+
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
 
-O frontend estará em `http://localhost:5173`
+O frontend vai rodar em `http://localhost:5173`.
 
-## 📖 Como Usar
+## Como Usar
 
-1. Acesse o frontend no navegador
-2. Registre uma nova conta ou faça login
-3. Crie autores e livros através da interface
+1. Abra o navegador e acesse a URL do frontend (geralmente `http://localhost:5173`)
+2. Na tela de login, clique em "Registre-se" para criar uma conta
+3. Preencha nome, email e senha e registre-se
 
-## 🔑 Endpoints Principais
+Para criar um livro, você precisa primeiro ter pelo menos um autor cadastrado. Quando você cria um autor, ele aparece automaticamente no menu de seleção para criar um livro.
 
-- `POST /auth/register` - Registrar usuário
-- `POST /auth/login` - Fazer login
-- `GET /authors` - Listar autores
-- `POST /authors` - Criar autor
-- `GET /books` - Listar livros
-- `POST /books` - Criar livro
+## Tecnologias Utilizadas
 
-Todas as rotas (exceto `/auth/*`) requerem autenticação via token JWT.
+**Backend:**
+- Node.js com Express
+- MySQL para banco de dados
+- JWT para autenticação
+- bcrypt para hash de senhas
 
-## 🛠️ Tecnologias
-
-- **Backend**: Node.js, Express, MySQL, JWT
-- **Frontend**: React, Vite, Axios
+**Frontend:**
+- React 19
+- Vite 
+- Axios
