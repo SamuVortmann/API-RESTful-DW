@@ -11,7 +11,7 @@ export default function App() {
   const [autoresKey, setAutoresKey] = useState(0); // Key para forçar atualização
 
   useEffect(() => {
-    // Check if user is already logged in
+    // Verifica se o usuário já está logado
     if (authService.isAuthenticated()) {
       authService.getCurrentUser()
         .then((userData) => {

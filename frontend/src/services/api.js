@@ -4,7 +4,7 @@ export const api = axios.create({
   baseURL: "http://localhost:3000"
 });
 
-// Token management
+// Gerenciamento de tokens
 const getToken = () => localStorage.getItem("accessToken");
 const getRefreshToken = () => localStorage.getItem("refreshToken");
 const setTokens = (accessToken, refreshToken) => {
@@ -18,7 +18,7 @@ const clearTokens = () => {
   localStorage.removeItem("refreshToken");
 };
 
-// Add token to requests
+// Adiciona token às requisições
 api.interceptors.request.use(
   (config) => {
     const token = getToken();
@@ -32,13 +32,13 @@ api.interceptors.request.use(
   }
 );
 
-// Handle token refresh on 401 errors
+// Trata atualização de token em erros 401
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
 
-    // If error is 401 and we haven't tried to refresh yet
+    // Se o erro for 401 e ainda não tentamos atualizar
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 
@@ -58,7 +58,7 @@ api.interceptors.response.use(
         const { accessToken } = response.data;
         setTokens(accessToken, refreshToken);
 
-        // Retry original request with new token
+        // Tenta novamente a requisição original com o novo token
         originalRequest.headers.Authorization = `Bearer ${accessToken}`;
         return api(originalRequest);
       } catch (refreshError) {
@@ -72,7 +72,7 @@ api.interceptors.response.use(
   }
 );
 
-// Export auth functions
+// Exporta funções de autenticação
 export const authService = {
   login: async (email, password) => {
     const response = await api.post("/auth/login", { email, password });

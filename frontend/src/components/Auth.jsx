@@ -22,7 +22,7 @@ export default function Auth({ onLoginSuccess }) {
         onLoginSuccess(user);
       } else {
         await authService.register(formData.nome, formData.email, formData.password);
-        // After registration, automatically log in
+        // Após o registro, faz login automaticamente
         const { user } = await authService.login(formData.email, formData.password);
         onLoginSuccess(user);
       }
@@ -101,4 +101,5 @@ export default function Auth({ onLoginSuccess }) {
     </div>
   );
 }
+
 
